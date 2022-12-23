@@ -1,4 +1,5 @@
 import Tile from '../../atoms/Tile';
+import './style.css';
 
 export default function GridBoard({ grid }) {
 	return (
