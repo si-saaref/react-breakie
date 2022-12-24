@@ -1,0 +1,6 @@
+table {
+	background: black;
+	border-collapse: separate;
+	width: fit-content;
+	/* border-spacing: 0 1em; */
+}
