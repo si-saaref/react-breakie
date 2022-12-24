@@ -8,6 +8,7 @@ import './style.css';
 export default function Board({ grid }) {
 	const [gridLayout, setGridLayout] = useState([...grid]);
 	const [currentScore, setCurrentScore] = useState(1000);
+	const [winner, setWinner] = useState(null);
 	const btnRight = useRef();
 	const btnLeft = useRef();
 	const btnUp = useRef();
@@ -55,6 +56,7 @@ export default function Board({ grid }) {
 				) {
 					if (parentItem[charItem + 1] === 3) {
 						toast.success('You WINNNNNN !!!!', { duration: 1000, position: 'top-right' });
+						setWinner('P1');
 					}
 					if (parentItem[charItem + 1] === 2) {
 						setCurrentScore((prevValue) => prevValue + 30);
@@ -88,6 +90,7 @@ export default function Board({ grid }) {
 				) {
 					if (parentItem[charItem - 1] === 3) {
 						toast.success('You WINNNNNN !!!!', { duration: 1000, position: 'top-right' });
+						setWinner('P1');
 					}
 					if (parentItem[charItem - 1] === 2) {
 						setCurrentScore((prevValue) => prevValue + 30);
@@ -115,7 +118,14 @@ export default function Board({ grid }) {
 			if (parentItem.includes(4)) {
 				const charParentItem = newGridState.indexOf(parentItem);
 				const charChildItem = parentItem.indexOf(4);
-
+				console.log(newGridState[idx - 1], idx);
+				if (idx === 0) {
+					toast.error("You Can't go through that way bruh !!!!", {
+						duration: 1000,
+						position: 'top-right',
+					});
+					return;
+				}
 				if (
 					newGridState[idx - 1][charChildItem] === 1 ||
 					newGridState[idx - 1][charChildItem] === 3 ||
@@ -124,6 +134,7 @@ export default function Board({ grid }) {
 					// console.log('WPO',charParentItem, charChildItem)
 					if (newGridState[idx - 1][charChildItem] === 3) {
 						toast.success('You WINNNNNN !!!!', { duration: 1000, position: 'top-right' });
+						setWinner('P1');
 					}
 					if (newGridState[idx - 1][charChildItem] === 2) {
 						setCurrentScore((prevValue) => prevValue + 30);
@@ -170,6 +181,7 @@ export default function Board({ grid }) {
 			) {
 				if (newGridState[idxParent + 1][idxChar] === 3) {
 					toast.success('You WINNNNNN !!!!', { duration: 1000, position: 'top-right' });
+					setWinner('P1');
 				}
 				if (newGridState[idxParent + 1][idxChar] === 2) {
 					setCurrentScore((prevValue) => prevValue + 30);
@@ -195,8 +207,11 @@ export default function Board({ grid }) {
 	};
 
 	const resetGame = () => {
+		console.log('MAIN GRID', mainGrid);
+		window.location.reload();
 		setGridLayout(mainGrid);
 		setCurrentScore(1000);
+		setWinner(null);
 	};
 
 	return (
@@ -214,17 +229,17 @@ export default function Board({ grid }) {
 				</div>
 				<GridBoard grid={gridLayout} />
 				<div className='button-wrapper'>
-					<Button onClick={goingUp} reference={btnUp}>
+					<Button onClick={goingUp} reference={btnUp} disabled={winner ? true : false}>
 						Up
 					</Button>
 					<div className=''>
-						<Button onClick={goingLeft} reference={btnLeft}>
+						<Button onClick={goingLeft} reference={btnLeft} disabled={winner ? true : false}>
 							Left
 						</Button>
-						<Button onClick={goingDown} reference={btnDown}>
+						<Button onClick={goingDown} reference={btnDown} disabled={winner ? true : false}>
 							Down
 						</Button>
-						<Button onClick={goingRight} reference={btnRight}>
+						<Button onClick={goingRight} reference={btnRight} disabled={winner ? true : false}>
 							Right
 						</Button>
 					</div>
@@ -260,6 +275,7 @@ export default function Board({ grid }) {
 // 			// console.log('WPO',charParentItem, idxChar)
 // 			if (newGridState[idxParent - 1][idxChar] === 3) {
 // 				toast.success('You WINNNNNN !!!!', { duration: 1000, position: 'top-right' });
+// setWinner('P1');
 // 			}
 // 			if (newGridState[idxParent - 1][idxChar] === 2) {
 // 				setCurrentScore((prevValue) => prevValue + 30);
