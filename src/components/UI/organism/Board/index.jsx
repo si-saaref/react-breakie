@@ -102,6 +102,44 @@ export default function Board({ grid }) {
 		setGridLayout(newGridState);
 	};
 
+	const goingDown = () => {
+		// console.log(appState)
+		let newGridState = [...gridLayout];
+		// let deepCloneState = JSON.parse(JSON.stringify(appState));
+		// console.log(newGridState);
+		// ! FIX BISA => MASIH MASUK LOGIC
+		const prevItem = newGridState.find((item) => {
+			return item.includes(4);
+		});
+		const idxParent = newGridState.indexOf(prevItem);
+		const idxChar = prevItem.indexOf(4);
+		let newGridRow = newGridState[idxParent + 1];
+		if (idxParent < newGridState.length && newGridState[idxParent + 1] !== undefined) {
+			if (
+				newGridState[idxParent + 1][idxChar] === 1 ||
+				newGridState[idxParent + 1][idxChar] === 3 ||
+				newGridState[idxParent + 1][idxChar] === 2
+			) {
+				if (newGridState[idxParent + 1][idxChar] === 3) {
+					alert('YOU WIN');
+				}
+				// if (newGridState[idxParent + 1][idxChar] === 2) {
+				// 	setCurrentScore((prevValue) => prevValue + 30);
+				// } else {
+				// 	setCurrentScore(currentScore - 10);
+				// }
+				prevItem.splice(idxChar, 1, 1);
+				newGridRow.splice(idxChar, 1, 4);
+				console.log(prevItem, idxParent, idxChar, newGridState);
+			} else {
+				alert('YEU GEBLEK');
+			}
+		} else {
+			alert('YEU GEBLEK');
+		}
+		setGridLayout(newGridState);
+	};
+
 	return (
 		<>
 			<div className='container-fluid'>
@@ -112,7 +150,7 @@ export default function Board({ grid }) {
 					<Button onClick={goingUp}>Up</Button>
 					<Button onClick={goingRight}>Right</Button>
 					<Button onClick={goingLeft}>Left</Button>
-					<Button>Down</Button>
+					<Button onClick={goingDown}>Down</Button>
 				</div>
 			</div>
 		</>
