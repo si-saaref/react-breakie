@@ -12,6 +12,7 @@ export default function Background() {
 						viewBox='0 24 150 28'
 						preserveAspectRatio='none'
 						shapeRendering='auto'
+						height={1000}
 					>
 						<defs>
 							<path

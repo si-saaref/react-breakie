@@ -3,7 +3,7 @@
 	cursor: pointer;
 	/* Variables */
 	--button_radius: 0.75em;
-	--button_color: #e8e8e8;
+	--button_color: #fff;
 	--button_outline_color: #000000;
 	font-size: 17px;
 	font-weight: bold;
