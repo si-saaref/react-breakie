@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { gridLayout as grid } from '../../utils/utils';
+import Background from '../UI/organism/Background';
 import Board from '../UI/organism/Board';
 
 export default function Game() {
@@ -11,6 +12,7 @@ export default function Game() {
 			<div className='game-container'>
 				<Board grid={gridLayout} />
 			</div>
+			<Background />
 		</>
 	);
 }
