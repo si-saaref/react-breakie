@@ -66,6 +66,42 @@ export default function Board({ grid }) {
 		setGridLayout(newGridState);
 	};
 
+	const goingUp = () => {
+		// console.log(appState)
+		let newGridState = [...gridLayout];
+		newGridState.forEach((parentItem, idx) => {
+			if (parentItem.includes(4)) {
+				const charParentItem = newGridState.indexOf(parentItem);
+				const charChildItem = parentItem.indexOf(4);
+
+				if (
+					newGridState[idx - 1][charChildItem] === 1 ||
+					newGridState[idx - 1][charChildItem] === 3 ||
+					newGridState[idx - 1][charChildItem] === 2
+				) {
+					// console.log('WPO',charParentItem, charChildItem)
+					if (newGridState[idx - 1][charChildItem] === 3) {
+						alert('YOU WIN');
+					}
+					// if (newGridState[idx - 1][charChildItem] === 2) {
+					// 	setCurrentScore((prevValue) => prevValue + 30);
+					// } else {
+					// 	setCurrentScore(currentScore - 10);
+					// }
+					let newGridRow = [...newGridState[charParentItem - 1]];
+					newGridRow.splice(charChildItem, 1, 4);
+					newGridState.splice(charParentItem - 1, 1, newGridRow);
+					parentItem.splice(charChildItem, 1, 1);
+
+					// console.log(newGridState, newGridRow)
+				} else {
+					alert("YOU CAN'T GO THROUGH BLOCKING WAY");
+				}
+			}
+		});
+		setGridLayout(newGridState);
+	};
+
 	return (
 		<>
 			<div className='container-fluid'>
@@ -73,7 +109,7 @@ export default function Board({ grid }) {
 				<h1>Breakie</h1>
 				<GridBoard grid={gridLayout} />
 				<div className='button-wrapper'>
-					<Button>Up</Button>
+					<Button onClick={goingUp}>Up</Button>
 					<Button onClick={goingRight}>Right</Button>
 					<Button onClick={goingLeft}>Left</Button>
 					<Button>Down</Button>
