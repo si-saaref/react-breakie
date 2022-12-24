@@ -1,6 +1,26 @@
 table {
-	background: black;
+	/* background: black; */
 	border-collapse: separate;
 	width: fit-content;
-	/* border-spacing: 0 1em; */
+	/* border-spacing: 0.5rem 0.5rem; */
+}
+
+td {
+	border: 1px solid black;
+}
+
+tr:nth-child(1) td:nth-child(1) {
+	border-top-left-radius: 10px;
+}
+
+tr:nth-child(8) td:nth-child(1) {
+	border-bottom-left-radius: 10px;
+}
+
+tr:nth-child(1) td:nth-child(8) {
+	border-top-right-radius: 10px;
+}
+
+tr:nth-child(8) td:nth-child(8) {
+	border-bottom-right-radius: 10px;
 }
