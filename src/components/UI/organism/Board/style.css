@@ -1,6 +1,6 @@
 .container-fluid {
-	background: lightblue;
 	height: 100vh;
+	width: fit-content;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -16,7 +16,16 @@
 	gap: 10px;
 }
 
-.button-wrapper div {
+.button-wrapper div,
+.info-wrapper div {
 	display: flex;
+	align-items: center;
 	gap: 10px;
+}
+
+.info-wrapper {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }

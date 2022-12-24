@@ -1,4 +1,4 @@
-button {
+.button {
 	padding: 0;
 	cursor: pointer;
 	/* Variables */
@@ -12,7 +12,8 @@ button {
 	background: var(--button_outline_color);
 }
 
-.button_top {
+.button_top,
+.btn-reset {
 	display: block;
 	box-sizing: border-box;
 	border: 2px solid var(--button_outline_color);
@@ -24,12 +25,23 @@ button {
 	transition: transform 0.1s ease;
 }
 
-button:hover .button_top {
+.btn-reset {
+	padding: 0.2rem 0.5rem;
+	font-weight: normal;
+	font-size: 14px;
+	background: red;
+	color: white;
+	border-radius: 5px;
+}
+
+.button:hover .button_top,
+.button:hover .btn-reset {
 	/* Pull the button upwards when hovered */
 	transform: translateY(-0.33em);
 }
 
-button:active .button_top {
+.button:active .button_top,
+.button:active .btn-reset {
 	/* Push the button downwards when pressed */
 	transform: translateY(0);
 }

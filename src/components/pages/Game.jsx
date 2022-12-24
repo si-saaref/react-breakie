@@ -1,11 +1,16 @@
 import { useState } from 'react';
-import { gridLayout } from '../../utils/utils';
+import { gridLayout as grid } from '../../utils/utils';
 import Board from '../UI/organism/Board';
 
 export default function Game() {
+	// ! THIS WILL DEEP CLONE THE NESTER ARRAY, so the main grid layout can be reused to reset the game
+	const [gridLayout] = useState(JSON.parse(JSON.stringify(grid)));
+
 	return (
 		<>
-			<Board grid={gridLayout} />
+			<div className='game-container'>
+				<Board grid={gridLayout} />
+			</div>
 		</>
 	);
 }
