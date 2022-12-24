@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Button from '../../atoms/Button';
 import GridBoard from '../../molecules/GridBoard';
 import './style.css';
@@ -9,8 +9,34 @@ export default function Board({ grid }) {
 	const [gridLayout, setGridLayout] = useState([...grid]);
 	const [currentScore, setCurrentScore] = useState(1000);
 
+	useEffect(() => {
+		document.addEventListener('keydown', function (e) {
+			const { key } = e;
+			checkKeyPress(key.toLowerCase());
+			console.log(e);
+		});
+	}, []);
+
+	// useEffect(() => {
+	// 	console.log('DEAGAIGJAISJ ', gridLayout);
+	// }, [gridLayout]);
+
+	const checkKeyPress = (key) => {
+		if (key === 'arrowright') {
+			goingRight();
+		}
+		if (key === 'arrowleft') {
+			goingLeft();
+		}
+		if (key === 'arrowdown') {
+			goingDown();
+		}
+		if (key === 'arrowup') {
+			goingUp();
+		}
+	};
+
 	const goingRight = () => {
-		// console.log(appState)
 		let newGridState = [...gridLayout];
 		newGridState.forEach((parentItem, idx) => {
 			if (parentItem.includes(4)) {
@@ -97,9 +123,10 @@ export default function Board({ grid }) {
 					} else {
 						setCurrentScore(currentScore - 10);
 					}
-					let newGridRow = [...newGridState[charParentItem - 1]];
+					let newGridRow = newGridState[charParentItem - 1];
 					newGridRow.splice(charChildItem, 1, 4);
 					newGridState.splice(charParentItem - 1, 1, newGridRow);
+					console.log('new grid row =>', newGridRow);
 					parentItem.splice(charChildItem, 1, 1);
 
 					// console.log(newGridState, newGridRow)
@@ -111,6 +138,7 @@ export default function Board({ grid }) {
 				}
 			}
 		});
+		console.log('GOING UP >', newGridState);
 		setGridLayout(newGridState);
 	};
 
@@ -120,6 +148,7 @@ export default function Board({ grid }) {
 		// let deepCloneState = JSON.parse(JSON.stringify(appState));
 		// console.log(newGridState);
 		// ! FIX BISA => MASIH MASUK LOGIC
+		console.log('NEW GRID DOWN =>', newGridState);
 		const prevItem = newGridState.find((item) => {
 			return item.includes(4);
 		});
@@ -189,3 +218,59 @@ export default function Board({ grid }) {
 		</>
 	);
 }
+
+// const goingUp = () => {
+// 	// console.log(appState)
+// 	let newGridState = [...gridLayout];
+// 	// newGridState.forEach((parentItem, idx) => {
+// 	// 	if (parentItem.includes(4)) {
+// 	// 		const charParentItem = newGridState.indexOf(parentItem);
+// 	// 		const charChildItem = parentItem.indexOf(4);
+
+// 	// 	}
+// 	// });
+// 	const prevItem = newGridState.find((item) => item.includes(4));
+
+// 	const idxParent = newGridState.indexOf(prevItem);
+// 	const idxChar = prevItem.indexOf(4);
+
+// 	// ! if we wrap or deep clone newGridRow with [...arr] => the items cannot be direct access
+// 	let newGridRow = newGridState[idxParent - 1];
+// 	if (idxParent < newGridState.length && newGridRow !== undefined) {
+// 		if (
+// 			newGridState[idxParent - 1][idxChar] === 1 ||
+// 			newGridState[idxParent - 1][idxChar] === 3 ||
+// 			newGridState[idxParent - 1][idxChar] === 2
+// 		) {
+// 			// console.log('WPO',charParentItem, idxChar)
+// 			if (newGridState[idxParent - 1][idxChar] === 3) {
+// 				toast.success('You WINNNNNN !!!!', { duration: 1000, position: 'top-right' });
+// 			}
+// 			if (newGridState[idxParent - 1][idxChar] === 2) {
+// 				setCurrentScore((prevValue) => prevValue + 30);
+// 			} else {
+// 				setCurrentScore(currentScore - 10);
+// 			}
+// 			// let newGridRow = [...newGridState[charParentItem - 1]];
+// 			prevItem.splice(idxChar, 1, 1);
+// 			newGridRow.splice(idxChar, 1, 4);
+// 			// newGridState.splice(charParentItem - 1, 1, newGridRow);
+// 			console.log('new grid row =>', newGridRow);
+
+// 			// console.log(newGridState, newGridRow)
+// 		} else {
+// 			toast.error("You Can't go through that way bruh !!!!", {
+// 				duration: 1000,
+// 				position: 'top-right',
+// 			});
+// 		}
+// 	} else {
+// 		toast.error("You Can't go through that way bruh !!!!", {
+// 			duration: 1000,
+// 			position: 'top-right',
+// 		});
+// 	}
+
+// 	console.log('GOING UP >', newGridState);
+// 	setGridLayout(newGridState);
+// };
