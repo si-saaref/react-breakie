@@ -7,13 +7,13 @@ import {
 } from 'react-icons/ai';
 import './style.css';
 
-export default function Button({ children, onClick }) {
+export default function Button({ children, onClick, onKeyDown }) {
 	const [icon] = useState(children.toLowerCase());
 
 	return (
 		<>
 			{/* <Button>{children}</Button> */}
-			<button className='button' onClick={onClick}>
+			<button className='button' onClick={onClick} onKeyDown={onKeyDown}>
 				<span className='button_top'>
 					{icon === 'left' ? (
 						<ArrowLeft />
