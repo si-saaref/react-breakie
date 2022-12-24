@@ -1,38 +1,45 @@
-import { useEffect, useState } from 'react';
+import { createRef, useEffect, useRef, useState } from 'react';
+import { toast } from 'react-hot-toast';
+import { gridLayout as mainGrid } from '../../../../utils/utils';
 import Button from '../../atoms/Button';
 import GridBoard from '../../molecules/GridBoard';
 import './style.css';
-import { gridLayout as mainGrid } from '../../../../utils/utils';
-import { toast, Toaster } from 'react-hot-toast';
 
 export default function Board({ grid }) {
 	const [gridLayout, setGridLayout] = useState([...grid]);
 	const [currentScore, setCurrentScore] = useState(1000);
+	const btnRight = useRef();
+	const btnLeft = useRef();
+	const btnUp = useRef();
+	const btnDown = useRef();
 
 	useEffect(() => {
+		// console.log(btnRightW);
 		document.addEventListener('keydown', function (e) {
 			const { key } = e;
 			checkKeyPress(key.toLowerCase());
-			console.log(e);
+			// console.log(e);
 		});
 	}, []);
 
-	// useEffect(() => {
-	// 	console.log('DEAGAIGJAISJ ', gridLayout);
-	// }, [gridLayout]);
-
 	const checkKeyPress = (key) => {
 		if (key === 'arrowright') {
-			goingRight();
+			// goingRight();
+			// console.log('BTRN RIGHT =>', btnRightW);
+			// console.log('KCAOk =>', btnRight);
+			btnRight.current.click();
 		}
 		if (key === 'arrowleft') {
-			goingLeft();
+			btnLeft.current.click();
+			// goingLeft();
 		}
 		if (key === 'arrowdown') {
-			goingDown();
+			btnDown.current.click();
+			// goingDown();
 		}
 		if (key === 'arrowup') {
-			goingUp();
+			btnUp.current.click();
+			// goingUp();
 		}
 	};
 
@@ -207,11 +214,19 @@ export default function Board({ grid }) {
 				</div>
 				<GridBoard grid={gridLayout} />
 				<div className='button-wrapper'>
-					<Button onClick={goingUp}>Up</Button>
+					<Button onClick={goingUp} reference={btnUp}>
+						Up
+					</Button>
 					<div className=''>
-						<Button onClick={goingLeft}>Left</Button>
-						<Button onClick={goingDown}>Down</Button>
-						<Button onClick={goingRight}>Right</Button>
+						<Button onClick={goingLeft} reference={btnLeft}>
+							Left
+						</Button>
+						<Button onClick={goingDown} reference={btnDown}>
+							Down
+						</Button>
+						<Button onClick={goingRight} reference={btnRight}>
+							Right
+						</Button>
 					</div>
 				</div>
 			</div>
