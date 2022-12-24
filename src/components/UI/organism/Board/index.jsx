@@ -3,6 +3,7 @@ import Button from '../../atoms/Button';
 import GridBoard from '../../molecules/GridBoard';
 import './style.css';
 import { gridLayout as mainGrid } from '../../../../utils/utils';
+import { toast, Toaster } from 'react-hot-toast';
 
 export default function Board({ grid }) {
 	const [gridLayout, setGridLayout] = useState([...grid]);
@@ -20,7 +21,7 @@ export default function Board({ grid }) {
 					parentItem[charItem + 1] === 2
 				) {
 					if (parentItem[charItem + 1] === 3) {
-						alert('YOU WIN');
+						toast.success('You WINNNNNN !!!!', { duration: 1000, position: 'top-right' });
 					}
 					if (parentItem[charItem + 1] === 2) {
 						setCurrentScore((prevValue) => prevValue + 30);
@@ -30,7 +31,10 @@ export default function Board({ grid }) {
 					parentItem.splice(charItem + 1, 1, 4);
 					parentItem.splice(charItem, 1, 1);
 				} else {
-					alert("YOU CAN'T GO THROUGH BLOCKING WAY");
+					toast.error("You Can't go through that way bruh !!!!", {
+						duration: 1000,
+						position: 'top-right',
+					});
 				}
 				// console.log(parentItem)
 			}
@@ -50,7 +54,7 @@ export default function Board({ grid }) {
 					parentItem[charItem - 1] === 2
 				) {
 					if (parentItem[charItem - 1] === 3) {
-						alert('YOU WIN');
+						toast.success('You WINNNNNN !!!!', { duration: 1000, position: 'top-right' });
 					}
 					if (parentItem[charItem - 1] === 2) {
 						setCurrentScore((prevValue) => prevValue + 30);
@@ -60,7 +64,10 @@ export default function Board({ grid }) {
 					parentItem.splice(charItem - 1, 1, 4);
 					parentItem.splice(charItem, 1, 1);
 				} else {
-					alert("YOU CAN'T GO THROUGH BLOCKING WAY");
+					toast.error("You Can't go through that way bruh !!!!", {
+						duration: 1000,
+						position: 'top-right',
+					});
 				}
 				// console.log(parentItem)
 			}
@@ -83,7 +90,7 @@ export default function Board({ grid }) {
 				) {
 					// console.log('WPO',charParentItem, charChildItem)
 					if (newGridState[idx - 1][charChildItem] === 3) {
-						alert('YOU WIN');
+						toast.success('You WINNNNNN !!!!', { duration: 1000, position: 'top-right' });
 					}
 					if (newGridState[idx - 1][charChildItem] === 2) {
 						setCurrentScore((prevValue) => prevValue + 30);
@@ -97,7 +104,10 @@ export default function Board({ grid }) {
 
 					// console.log(newGridState, newGridRow)
 				} else {
-					alert("YOU CAN'T GO THROUGH BLOCKING WAY");
+					toast.error("You Can't go through that way bruh !!!!", {
+						duration: 1000,
+						position: 'top-right',
+					});
 				}
 			}
 		});
@@ -123,7 +133,7 @@ export default function Board({ grid }) {
 				newGridState[idxParent + 1][idxChar] === 2
 			) {
 				if (newGridState[idxParent + 1][idxChar] === 3) {
-					alert('YOU WIN');
+					toast.success('You WINNNNNN !!!!', { duration: 1000, position: 'top-right' });
 				}
 				if (newGridState[idxParent + 1][idxChar] === 2) {
 					setCurrentScore((prevValue) => prevValue + 30);
@@ -134,10 +144,16 @@ export default function Board({ grid }) {
 				newGridRow.splice(idxChar, 1, 4);
 				console.log(prevItem, idxParent, idxChar, newGridState);
 			} else {
-				alert('YEU GEBLEK');
+				toast.error("You Can't go through that way bruh !!!!", {
+					duration: 1000,
+					position: 'top-right',
+				});
 			}
 		} else {
-			alert('YEU GEBLEK');
+			toast.error("You Can't go through that way bruh !!!!", {
+				duration: 1000,
+				position: 'top-right',
+			});
 		}
 		setGridLayout(newGridState);
 	};

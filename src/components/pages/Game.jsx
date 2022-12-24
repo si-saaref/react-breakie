@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Toaster } from 'react-hot-toast';
 import { gridLayout as grid } from '../../utils/utils';
 import Background from '../UI/organism/Background';
 import Board from '../UI/organism/Board';
@@ -9,6 +10,7 @@ export default function Game() {
 
 	return (
 		<>
+			<Toaster />
 			<div className='game-container'>
 				<Board grid={gridLayout} />
 			</div>
