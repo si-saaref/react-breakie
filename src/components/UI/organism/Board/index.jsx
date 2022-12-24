@@ -148,9 +148,11 @@ export default function Board({ grid }) {
 				<GridBoard grid={gridLayout} />
 				<div className='button-wrapper'>
 					<Button onClick={goingUp}>Up</Button>
-					<Button onClick={goingRight}>Right</Button>
-					<Button onClick={goingLeft}>Left</Button>
-					<Button onClick={goingDown}>Down</Button>
+					<div className=''>
+						<Button onClick={goingLeft}>Left</Button>
+						<Button onClick={goingDown}>Down</Button>
+						<Button onClick={goingRight}>Right</Button>
+					</div>
 				</div>
 			</div>
 		</>
