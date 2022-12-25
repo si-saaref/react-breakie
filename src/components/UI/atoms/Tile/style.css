@@ -1,6 +1,6 @@
 .tile {
-	width: 50px;
-	height: 50px;
+	width: 35px;
+	height: 35px;
 	background: white;
 }
 
@@ -18,4 +18,18 @@
 
 .character {
 	background: blue;
+}
+
+@media only screen and (max-width: 400px) {
+	.tile {
+		/* width: 30px; */
+		/* height: 30px; */
+	}
+}
+
+@media only screen and (min-width: 1300px) {
+	.tile {
+		width: 60px;
+		height: 60px;
+	}
 }
