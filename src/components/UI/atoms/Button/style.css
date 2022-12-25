@@ -34,14 +34,18 @@
 	border-radius: 5px;
 }
 
-.button:hover .button_top,
-.button:hover .btn-reset {
+.button:not(:disabled):hover .button_top,
+.button:not(:disabled):hover .btn-reset {
 	/* Pull the button upwards when hovered */
 	transform: translateY(-0.33em);
 }
 
-.button:active .button_top,
-.button:active .btn-reset {
+.button:not(:disabled):active .button_top,
+.button:not(:disabled):active .btn-reset {
 	/* Push the button downwards when pressed */
 	transform: translateY(0);
+}
+
+.button:disabled {
+	cursor: not-allowed;
 }
