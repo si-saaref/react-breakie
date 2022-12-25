@@ -15,19 +15,15 @@ export default function Board({ grid }) {
 	const btnDown = useRef();
 
 	useEffect(() => {
-		// console.log(btnRightW);
 		document.addEventListener('keydown', function (e) {
 			const { key } = e;
 			checkKeyPress(key.toLowerCase());
-			// console.log(e);
 		});
 	}, []);
 
 	const checkKeyPress = (key) => {
 		if (key === 'arrowright') {
 			// goingRight();
-			// console.log('BTRN RIGHT =>', btnRightW);
-			// console.log('KCAOk =>', btnRight);
 			btnRight.current.click();
 		}
 		if (key === 'arrowleft') {
@@ -71,14 +67,12 @@ export default function Board({ grid }) {
 						position: 'top-right',
 					});
 				}
-				// console.log(parentItem)
 			}
 		});
 		setGridLayout(newGridState);
 	};
 
 	const goingLeft = () => {
-		// console.log(appState)
 		let newGridState = [...gridLayout];
 		newGridState.forEach((parentItem) => {
 			if (parentItem.includes(4)) {
@@ -105,20 +99,17 @@ export default function Board({ grid }) {
 						position: 'top-right',
 					});
 				}
-				// console.log(parentItem)
 			}
 		});
 		setGridLayout(newGridState);
 	};
 
 	const goingUp = () => {
-		// console.log(appState)
 		let newGridState = [...gridLayout];
 		newGridState.forEach((parentItem, idx) => {
 			if (parentItem.includes(4)) {
 				const charParentItem = newGridState.indexOf(parentItem);
 				const charChildItem = parentItem.indexOf(4);
-				console.log(newGridState[idx - 1], idx);
 				if (idx === 0) {
 					toast.error("You Can't go through that way bruh !!!!", {
 						duration: 1000,
@@ -131,7 +122,6 @@ export default function Board({ grid }) {
 					newGridState[idx - 1][charChildItem] === 3 ||
 					newGridState[idx - 1][charChildItem] === 2
 				) {
-					// console.log('WPO',charParentItem, charChildItem)
 					if (newGridState[idx - 1][charChildItem] === 3) {
 						toast.success('You WINNNNNN !!!!', { duration: 1000, position: 'top-right' });
 						setWinner('P1');
@@ -144,10 +134,7 @@ export default function Board({ grid }) {
 					let newGridRow = newGridState[charParentItem - 1];
 					newGridRow.splice(charChildItem, 1, 4);
 					newGridState.splice(charParentItem - 1, 1, newGridRow);
-					console.log('new grid row =>', newGridRow);
 					parentItem.splice(charChildItem, 1, 1);
-
-					// console.log(newGridState, newGridRow)
 				} else {
 					toast.error("You Can't go through that way bruh !!!!", {
 						duration: 1000,
@@ -156,17 +143,13 @@ export default function Board({ grid }) {
 				}
 			}
 		});
-		console.log('GOING UP >', newGridState);
 		setGridLayout(newGridState);
 	};
 
 	const goingDown = () => {
-		// console.log(appState)
 		let newGridState = [...gridLayout];
 		// let deepCloneState = JSON.parse(JSON.stringify(appState));
-		// console.log(newGridState);
 		// ! FIX BISA => MASIH MASUK LOGIC
-		console.log('NEW GRID DOWN =>', newGridState);
 		const prevItem = newGridState.find((item) => {
 			return item.includes(4);
 		});
@@ -190,7 +173,6 @@ export default function Board({ grid }) {
 				}
 				prevItem.splice(idxChar, 1, 1);
 				newGridRow.splice(idxChar, 1, 4);
-				console.log(prevItem, idxParent, idxChar, newGridState);
 			} else {
 				toast.error("You Can't go through that way bruh !!!!", {
 					duration: 1000,
@@ -207,7 +189,6 @@ export default function Board({ grid }) {
 	};
 
 	const resetGame = () => {
-		console.log('MAIN GRID', mainGrid);
 		window.location.reload();
 		setGridLayout(mainGrid);
 		setCurrentScore(1000);
@@ -250,7 +231,6 @@ export default function Board({ grid }) {
 }
 
 // const goingUp = () => {
-// 	// console.log(appState)
 // 	let newGridState = [...gridLayout];
 // 	// newGridState.forEach((parentItem, idx) => {
 // 	// 	if (parentItem.includes(4)) {
@@ -272,7 +252,6 @@ export default function Board({ grid }) {
 // 			newGridState[idxParent - 1][idxChar] === 3 ||
 // 			newGridState[idxParent - 1][idxChar] === 2
 // 		) {
-// 			// console.log('WPO',charParentItem, idxChar)
 // 			if (newGridState[idxParent - 1][idxChar] === 3) {
 // 				toast.success('You WINNNNNN !!!!', { duration: 1000, position: 'top-right' });
 // setWinner('P1');
@@ -286,9 +265,7 @@ export default function Board({ grid }) {
 // 			prevItem.splice(idxChar, 1, 1);
 // 			newGridRow.splice(idxChar, 1, 4);
 // 			// newGridState.splice(charParentItem - 1, 1, newGridRow);
-// 			console.log('new grid row =>', newGridRow);
 
-// 			// console.log(newGridState, newGridRow)
 // 		} else {
 // 			toast.error("You Can't go through that way bruh !!!!", {
 // 				duration: 1000,
@@ -302,6 +279,5 @@ export default function Board({ grid }) {
 // 		});
 // 	}
 
-// 	console.log('GOING UP >', newGridState);
 // 	setGridLayout(newGridState);
 // };
