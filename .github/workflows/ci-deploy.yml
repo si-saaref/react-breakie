@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkou Repo
+      - name: Checkout Repo
         uses: actions/checkout@v3
 
       - name: Setup Node
@@ -27,7 +27,7 @@ jobs:
         run: yarn install --frozen-lockfile
 
       - name: Build Project
-        run: yarn build --if-present
+        run: yarn build
 
       # - name: Testing Code
       #   run: yarn test
