@@ -2,9 +2,8 @@ name: Deploy using GH Action
 
 on:
   push:
-    branches: ['master']
-  pull_request:
-    branches: ['master']
+    branches:
+      - 'master'
 
 jobs:
   build:
@@ -42,6 +41,14 @@ jobs:
       #   uses: JamesIves/github-pages-deploy-action@v4
       #   with:
       #     folder: dist
+
+      - name: Build and Push Docker Image
+        uses: mr-smithers-excellent/docker-build-push@v4
+        with:
+          image: sisaaref/reactappbreakie
+          registry: docker.io
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
 
   deploy:
     name: Deploy
