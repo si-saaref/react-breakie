@@ -5,7 +5,7 @@
 	--button_radius: 0.75em;
 	--button_color: #fff;
 	--button_outline_color: #000000;
-	font-size: 17px;
+	/* font-size: 17px; */
 	font-weight: bold;
 	border: none;
 	border-radius: var(--button_radius);
@@ -28,7 +28,7 @@
 .btn-reset {
 	padding: 0.2rem 0.5rem;
 	font-weight: normal;
-	font-size: 14px;
+	font-size: 10px;
 	background: red;
 	color: white;
 	border-radius: 5px;

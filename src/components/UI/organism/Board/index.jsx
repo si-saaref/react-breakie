@@ -198,11 +198,11 @@ export default function Board({ grid }) {
 	return (
 		<>
 			<div className='container-fluid'>
-				<h1>Breakie</h1>
+				<h1>React Breakieee</h1>
 				<div className='info-wrapper'>
 					<div className=''>
-						<h3>Score : </h3>
-						<h3 id='score'>{currentScore}</h3>
+						<h4>Score : </h4>
+						<h4 id='score'>{currentScore}</h4>
 					</div>
 					<button className='button' onClick={resetGame}>
 						<span className='btn-reset'>Reset</span>

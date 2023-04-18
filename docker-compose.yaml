@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  reactbreakie:
+    container_name: react_app_breakie
+    image: sisaaref/reactappbreakie:${tag}
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '7788:2374'
+      - '6050:6050'
+    stdin_open: true
+    tty: true
+    # volumes:
+    #   - ./:/usr/src/app
+    # restart: always
+    # command: yarn vite
+
+networks:
+  project-network:
+    name: project-network
