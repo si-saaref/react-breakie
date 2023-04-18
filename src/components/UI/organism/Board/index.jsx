@@ -198,7 +198,7 @@ export default function Board({ grid }) {
 	return (
 		<>
 			<div className='container-fluid'>
-				<h1>Breakie</h1>
+				<h1>React Breakieee</h1>
 				<div className='info-wrapper'>
 					<div className=''>
 						<h4>Score : </h4>
