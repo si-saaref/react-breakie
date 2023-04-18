@@ -16,4 +16,5 @@ export default defineConfig({
 		},
 		port: '2374',
 	},
+	base: '/react-breakie/',
 });
