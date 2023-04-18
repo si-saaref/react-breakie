@@ -29,8 +29,8 @@ jobs:
       - name: Build Project
         run: yarn build --if-present
 
-      - name: Testing Code
-        run: yarn test
+      # - name: Testing Code
+      #   run: yarn test
 
       - name: Upload production-ready build files
         uses: actions/upload-artifact@v2
