@@ -225,6 +225,9 @@ export default function Board({ grid }) {
 						</Button>
 					</div>
 				</div>
+				<div className=''>
+					<p style={{ fontSize: '.5rem' }}>Made with &hearts;</p>
+				</div>
 			</div>
 		</>
 	);
