@@ -1,0 +1,62 @@
+name: Deploy using GH Action
+
+on:
+  push:
+    branches: ['master']
+  pull_request:
+    branches: ['master']
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkou Repo
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 14.x
+          cache: 'yarn'
+
+      - uses: egordm/gha-yarn-node-cache@v1
+
+      - name: Install Dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Build Project
+        run: yarn build --if-present
+
+      - name: Testing Code
+        run: yarn test
+
+      - name: Upload production-ready build files
+        uses: actions/upload-artifact@v2
+        with:
+          name: production-files
+          path: ./dist
+
+      # - name: Deploy
+      #   uses: JamesIves/github-pages-deploy-action@v4
+      #   with:
+      #     folder: dist
+
+  deploy:
+    name: Deploy
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+      - name: Download Artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: production-files
+          path: ./dist
+
+      - name: Deploy to Github Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: dist
